@@ -1,0 +1,12 @@
+{
+    "Facebook": [
+        {
+            "email": "sample3@gmail.com",
+            "password": "123456"
+        },
+        {
+            "email": "sample4@gmail.com",
+            "password": "098765"
+        }
+    ]
+}

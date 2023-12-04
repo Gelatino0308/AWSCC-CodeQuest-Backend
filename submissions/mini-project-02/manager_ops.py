@@ -139,7 +139,15 @@ def update(web_key):
             except Exception as e:
                 print("\n>> Invalid input: {e}\n")
         
-        data_choice = input("Enter which data to update ['email' or 'password']: ")
+        valid_key = False
+        while not valid_key:
+
+            data_choice = input("Enter which data to update ['email' or 'password']: ").lower()
+            if data_choice == "email" or data_choice == "password":
+                valid_key = True
+            else:
+                print("\n>> Only 'email' or 'password' can be recognized!\n")
+
         new_data_key = input(f"Enter your new {data_choice}: ")
 
         data_dict[web_key][data_num-1][data_choice] = new_data_key

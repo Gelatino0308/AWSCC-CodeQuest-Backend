@@ -34,7 +34,7 @@ def update_pass(id):
     return ({"result": "success"})
 
 @views.route("/delete/<id>", methods=["DELETE"])
-def delete_book(id):
+def delete_pass(id):
     Pass = Password.query.get(id)
     if Pass:
         db.session.delete(Pass)

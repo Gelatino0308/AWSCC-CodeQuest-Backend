@@ -9,7 +9,7 @@ let id;
 
 for (let i = 0; i < updateBtns.length; i++) {
     updateBtns[i].addEventListener("click", (event) => {
-        const parentNode = event.target.parentNode;
+        const parentNode = event.target.parentNode.parentNode;
         id = parentNode.dataset.id;
         updateWebsite.value = parentNode.querySelector('span:nth-child(2)').textContent;
         updateEmail.value = parentNode.querySelector('span:nth-child(4)').textContent;
@@ -17,7 +17,7 @@ for (let i = 0; i < updateBtns.length; i++) {
     });
 
     deleteBtns[i].addEventListener("click", (event) => {
-        id = event.target.parentNode.dataset.id;
+        id = event.target.parentNode.parentNode.dataset.id;
         fetch(`delete/${id}`, {
             method: "DELETE"
         }).then(data => data.json()).then(_ => window.location.href = "/")

@@ -3,52 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Password Manager WebApp</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <form action="/add" method="POST">
-        <h1>Add Account Passwords</h1>
-        <div>
-            <label for="addWebsite">Website Name</label>
-            <input type="text" id="addWebsite" name="website">
+    <div id="header">My Password Manager</div>
+    <div id="content">
+        <div id="create-and-update-panel">
+            <form class="modify-account-section" action="/add" method="POST">
+                <h1>Add Account Passwords</h1>
+                <div class="form-inputs">
+                    <div>
+                        <label for="addWebsite">Website Name</label>
+                        <input type="text" id="addWebsite" name="website">
+                    </div>
+                    <div>
+                        <label for="addEmail">Email</label>
+                        <input type="text" id="addEmail" name="email">
+                    </div>
+                    <div>
+                        <label for="addPassword">Password</label>
+                        <input type="text" id="addPassword" name="password">
+                    </div>
+                    <button type="submit">Add</button>
+                </div>
+            </form>
+        
+            <div class="modify-account-section">
+                <h1>Update Account Password</h1>
+                <div class="form-inputs">
+                    <div>
+                        <label for="updateWebsite">Website Name</label>
+                        <input type="text" id="updateWebsite" name="website">
+                    </div>
+                    <div>
+                        <label for="updateEmail">Email</label>
+                        <input type="text" id="updateEmail" name="email">
+                    </div>
+                    <div>
+                        <label for="updatePassword">Password</label>
+                        <input type="text" id="updatePassword" name="password">
+                    </div>
+                    <button type="submit" id="updatePassBtn">Update</button>
+                </div>
+            </div>
         </div>
-        <div>
-            <label for="addEmail">Email</label>
-            <input type="text" id="addEmail" name="email">
+        
+        <div id="account-list-panel">
+            <h1>List of Account Passwords</h1>
+            <ul>
+                {% for pass in passwords %}
+                <li class="account-details" data-id={{pass.id}} data-website={{pass.website}} data-email={{pass.email}} data-password={{pass.password}}>
+                    <div class="account-info">{{ pass.id }} | <b>Website:</b> <span>{{ pass.website }}</span> | <b>Email:</b> <span>{{ pass.email }}</span> | <b>Password:</b> {{ pass.password }}</div>
+                    <div class="account-buttons">
+                        <button class="update-btn">Update</button>
+                        <button class="delete-btn">Delete</button>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-        <div>
-            <label for="addPassword">Password</label>
-            <input type="text" id="addPassword" name="password">
-        </div>
-        <button type="submit">Add</button>
-    </form>
-
-    <h1>List of Account Passwords</h1>
-    <ul>
-        {% for pass in passwords %}
-        <li data-id={{pass.id}} data-website={{pass.website}} data-email={{pass.email}} data-password={{pass.password}}>
-            {{ pass.id }} | <b>Website:</b> <span>{{ pass.website }}</span> | <b>Email:</b> <span>{{ pass.email }}</span> | <b>Password:</b> {{ pass.password }}
-            <button class="update-btn">Update</button>
-            <button class="delete-btn">Delete</button>
-        </li>
-        {% endfor %}
-    </ul>
-
-    <h1>Update Account Password</h1>
-    <div>
-        <label for="updateWebsite">Website Name</label>
-        <input type="text" id="updateWebsite" name="website">
     </div>
-    <div>
-        <label for="updateEmail">Email</label>
-        <input type="text" id="updateEmail" name="email">
-    </div>
-    <div>
-        <label for="updatePassword">Password</label>
-        <input type="text" id="updatePassword" name="password">
-    </div>
-    <button type="submit" id="updatePassBtn">Update</button>
-
 
     <script type="text/javascript" src="{{ url_for('static', filename='index.js')}}"></script>
 </body>
